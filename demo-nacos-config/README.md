@@ -54,7 +54,8 @@ mvn spring-boot:run
 
 - The application will automatically fetch and update the configuration if dynamic refresh is enabled.
 
-  ![image-20250106215415757](C:\Users\Liang Nai Yun\AppData\Roaming\Typora\typora-user-images\image-20250106215415757.png)
+  ![image](https://github.com/user-attachments/assets/775ba00c-d413-4d77-a077-3db001f58653)
+
 
 ## How It Works
 
