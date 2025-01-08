@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="springframework.spring.jcl" type="repository">
+    <properties maven-id="org.springframework:spring-jcl:5.3.19" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-jcl/5.3.19/spring-jcl-5.3.19.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-jcl/5.3.19/spring-jcl-5.3.19-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-jcl/5.3.19/spring-jcl-5.3.19-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

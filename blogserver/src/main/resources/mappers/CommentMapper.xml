@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blogserver.persistence.mapper.CommentMapper">
+    <resultMap id="CommentResultMap" type="com.example.blogserver.model.Comment">
+        <result column="Id" property="id"></result>
+        <result column="UserId" property="userId"></result>
+        <result column="PostId" property="postId"></result>
+        <result column="Content" property="content"></result>
+        <result column="CreateDate" property="createDate"></result>
+    </resultMap>
+    <insert id="insertComment" parameterType="com.example.blogserver.model.Comment" useGeneratedKeys="true" keyColumn="Id" keyProperty="id">
+        insert into comment (UserId, PostId, Content, CreateDate)
+        values (#{userId}, #{postId}, #{content}, #{createDate})
+    </insert>
+    <update id="updateComment" parameterType="int">
+        update comment
+        <set>
+            <if test="content != null">Content=#{content}</if>
+        </set>
+        where Id = #{id}
+    </update>
+    <select id="selectCommentById" parameterType="int" resultMap="CommentResultMap">
+        select * from comment where Id = #{id}
+    </select>
+    <select id="selectCommentsByPostId" parameterType="int" resultMap="CommentResultMap">
+        select * from comment where PostId = #{postId}
+    </select>
+    <select id="selectCommentsByUserId" parameterType="int" resultMap="CommentResultMap">
+        select * from comment where UserId = #{userId}
+    </select>
+
+    <delete id="deleteComment" parameterType="int">
+        delete from comment where Id = #{id}
+    </delete>
+</mapper>

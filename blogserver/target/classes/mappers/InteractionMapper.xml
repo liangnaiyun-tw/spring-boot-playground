@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blogserver.persistence.mapper.InteractionMapper">
+    <resultMap id="InteractionResultMap" type="com.example.blogserver.model.Interaction">
+        <result column="Id" property="id"></result>
+        <result column="UserId" property="userId"></result>
+        <result column="PostId" property="postId"></result>
+        <result column="Type" property="interactionType"></result>
+        <result column="CreateDate" property="createDate"></result>
+    </resultMap>
+    <insert id="insertInteraction" parameterType="com.example.blogserver.model.Interaction" useGeneratedKeys="true" keyColumn="Id" keyProperty="id">
+        insert into interaction (UserId, PostId, Type, CreateDate)
+        values (#{userId}, #{postId}, #{interactionType}, #{createDate})
+    </insert>
+    <update id="updateInteraction" parameterType="int">
+        update interaction
+        <set>
+            <if test="interactionType != null">Type=#{interactionType}</if>
+        </set>
+        where Id = #{id}
+    </update>
+    <select id="selectInteractionsByPostId" parameterType="int" resultMap="InteractionResultMap">
+        select * from interaction where PostId = #{postId}
+    </select>
+    <select id="selectInteractionsByUserId" parameterType="int" resultMap="InteractionResultMap">
+        select * from interaction where UserId = #{userId}
+    </select>
+    <select id="selectInteractionById" parameterType="int" resultMap="InteractionResultMap">
+        select * from interaction where Id = #{id}
+    </select>
+    <select id="selectInteractionsByType" parameterType="int" resultMap="InteractionResultMap">
+        select * from interaction where Type = #{interactionType}
+    </select>
+
+    <select id="selectInteractionByPostIdAndType" resultMap="InteractionResultMap">
+        select * from interaction where PostId = #{postId} and Type = #{type}
+    </select>
+
+    <delete id="deleteInteraction" parameterType="int">
+        delete from interaction where id = #{id}
+    </delete>
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blogserver.persistence.mapper.UserMapper">
+    <resultMap id="UserResultMap" type="com.example.blogserver.model.User">
+        <result column="Id" property="id"></result>
+        <result column="Username" property="username"></result>
+        <result column="Password" property="password"></result>
+        <result column="Email" property="email"></result>
+        <result column="ProfilePicture" property="profilePicture"></result>
+        <result column="Description" property="description"></result>
+    </resultMap>
+    <insert id="register" parameterType="com.example.blogserver.model.User" useGeneratedKeys="true" keyColumn="Id" keyProperty="id">
+        insert into user (Username, Password, Email, ProfilePicture, Description)
+        values (#{username}, #{password}, #{email}, #{profilePicture}, #{description})
+    </insert>
+    <select id="findByUsername" parameterType="string" resultMap="UserResultMap">
+        select * from user where Username = #{username}
+    </select>
+</mapper>

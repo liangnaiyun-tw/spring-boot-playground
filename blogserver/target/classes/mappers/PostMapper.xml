@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blogserver.persistence.mapper.PostMapper">
+    <resultMap id="PostResultMap" type="com.example.blogserver.model.Post">
+        <result column="Id" property="id"></result>
+        <result column="UserId" property="userId"></result>
+        <result column="Title" property="title"></result>
+        <result column="Content" property="content"></result>
+        <result column="Category" property="category"></result>
+        <result column="PublicationDate" property="publicationDate"></result>
+        <result column="Tags" property="tags"></result>
+    </resultMap>
+    <insert id="createPost" parameterType="com.example.blogserver.model.Post" useGeneratedKeys="true" keyColumn="Id" keyProperty="id">
+        insert into post (UserId, Title, Content, Category, PublicationDate, Tags)
+        values (#{userId}, #{title}, #{content}, #{category}, #{publicationDate}, #{tags})
+    </insert>
+    <select id="postsByUser" parameterType="int" resultMap="PostResultMap">
+        select * from post where UserId = #{userId}
+    </select>
+    <select id="postById" parameterType="int" resultMap="PostResultMap">
+        select * from post where Id = #{id}
+    </select>
+    <update id="updatePost" parameterType="int">
+       update post
+       <set>
+           <if test="title != null">Title=#{title}</if>
+           <if test="content != null">Content=#{content}</if>
+           <if test="category != null">Category=#{category}</if>
+           <if test="tags != null">Tags=#{tags}</if>
+       </set>
+       where Id = #{id}
+    </update>
+    <delete id="deletePost" parameterType="int">
+        delete from post where Id = #{id}
+    </delete>
+</mapper>
