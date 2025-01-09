@@ -12,7 +12,7 @@
         insert into comment (UserId, PostId, Content, CreateDate)
         values (#{userId}, #{postId}, #{content}, #{createDate})
     </insert>
-    <update id="updateComment" parameterType="int">
+    <update id="updateComment" parameterType="com.example.blogserver.model.Comment">
         update comment
         <set>
             <if test="content != null">Content=#{content}</if>

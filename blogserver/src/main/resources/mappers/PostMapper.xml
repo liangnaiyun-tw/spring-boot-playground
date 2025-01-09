@@ -20,13 +20,13 @@
     <select id="postById" parameterType="int" resultMap="PostResultMap">
         select * from post where Id = #{id}
     </select>
-    <update id="updatePost" parameterType="int">
+    <update id="updatePost" parameterType="com.example.blogserver.model.Post">
        update post
        <set>
-           <if test="title != null">Title=#{title}</if>
-           <if test="content != null">Content=#{content}</if>
-           <if test="category != null">Category=#{category}</if>
-           <if test="tags != null">Tags=#{tags}</if>
+            <if test="title != null">Title = #{title},</if>
+            <if test="content != null">Content = #{content},</if>
+            <if test="category != null">Category = #{category},</if>
+            <if test="tags != null">Tags = #{tags},</if>
        </set>
        where Id = #{id}
     </update>

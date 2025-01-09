@@ -4,22 +4,25 @@ import com.example.blogserver.dtos.SubmitPostDto;
 import com.example.blogserver.dtos.mappingUtils.PostMappingUtils;
 import com.example.blogserver.model.Post;
 import com.example.blogserver.services.IPostService;
-import com.example.blogserver.services.PostServiceImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.example.blogserver.utils.Translator.translate;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
 @RequestMapping("/posts")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Slf4j
 public class PostController {
 
     private final IPostService postService;
@@ -29,14 +32,15 @@ public class PostController {
     public ResponseEntity<String> createPost(@RequestBody SubmitPostDto post) {
         postService.createPost(post);
 
-        return ResponseEntity.ok("Post created successfully");
+        return ResponseEntity.ok(translate("Post created successfully"));
     }
 
     @PostMapping("/update/{id}")
     public ResponseEntity<String> updatePost(@RequestBody SubmitPostDto post, @PathVariable int id) {
         postService.updatePost(post, id);
 
-        return ResponseEntity.ok("Post updated successfully");
+
+        return ResponseEntity.ok(translate("Post updated successfully"));
     }
 
     @GetMapping("")
@@ -86,7 +90,7 @@ public class PostController {
     public ResponseEntity<String> deletePost(@PathVariable int id) {
         postService.deletePost(id);
 
-        return ResponseEntity.ok("Post deleted successfully");
+        return ResponseEntity.ok(translate("Post deleted successfully"));
     }
 
 

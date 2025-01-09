@@ -64,6 +64,7 @@ public class PostServiceImpl implements IPostService{
         post.setContent(postDto.getContent());
         post.setCategory(postDto.getCategory());
         post.setTags(postDto.getTags());
+        log.info("Post to update: {}", post);
 
         return postMapper.updatePost(post);
     }

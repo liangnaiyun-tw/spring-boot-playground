@@ -12,7 +12,7 @@
         insert into interaction (UserId, PostId, Type, CreateDate)
         values (#{userId}, #{postId}, #{interactionType}, #{createDate})
     </insert>
-    <update id="updateInteraction" parameterType="int">
+    <update id="updateInteraction" parameterType="com.example.blogserver.model.Interaction">
         update interaction
         <set>
             <if test="interactionType != null">Type=#{interactionType}</if>
