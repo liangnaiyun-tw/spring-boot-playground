@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.example.blogserver.utils.Translator.translate;
+
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -30,7 +32,7 @@ public class AuthenticationController {
     public ResponseEntity<String> register(@RequestBody RegisterUserDto registerUserDto){
         authenticationService.register(registerUserDto);
 
-        return ResponseEntity.ok("User registered successfully");
+        return ResponseEntity.ok(translate("User registered successfully"));
     }
 
     @PostMapping("/login")

@@ -10,9 +10,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
+@Transactional
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AuthenticationService {
 
@@ -21,7 +23,11 @@ public class AuthenticationService {
     private final IUserService userService;
 
     public void register(RegisterUserDto registerUserDto){
-        User user = new User();
+        User user = User.builder()
+                .username(registerUserDto.getUsername())
+                .password(registerUserDto.getPassword())
+                .email(registerUserDto.getEmail())
+                .build();
         user.setUsername(registerUserDto.getUsername());
         user.setPassword(passwordEncoder.encode(registerUserDto.getPassword()));
         user.setEmail(registerUserDto.getEmail());

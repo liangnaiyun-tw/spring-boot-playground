@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.example.blogserver.utils.Translator.translate;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -29,7 +30,7 @@ public class InteractionController {
     public ResponseEntity<String> addInteraction(@RequestBody SubmitInteractionDto submitInteractionDto, @PathVariable int postId) {
         interactionService.insertInteraction(submitInteractionDto, postId);
 
-        return ResponseEntity.ok("Interaction added successfully");
+        return ResponseEntity.ok(translate("Interaction added successfully"));
 
     }
 
@@ -37,14 +38,14 @@ public class InteractionController {
     public ResponseEntity<String> deleteInteraction(@PathVariable int id) {
         interactionService.deleteInteraction(id);
 
-        return ResponseEntity.ok("Interaction deleted successfully");
+        return ResponseEntity.ok(translate("Interaction deleted successfully"));
     }
 
     @PostMapping("/interactions/{id}")
     public ResponseEntity<String> updateInteraction(@RequestBody SubmitInteractionDto submitInteractionDto, @PathVariable int id) {
         interactionService.updateInteraction(submitInteractionDto, id);
 
-        return ResponseEntity.ok("Interaction updated successfully");
+        return ResponseEntity.ok(translate("Interaction updated successfully"));
 
     }
 

@@ -4,6 +4,7 @@ import com.example.blogserver.dtos.SubmitCommentDto;
 import com.example.blogserver.dtos.mappingUtils.CommentMappingUtils;
 import com.example.blogserver.model.Comment;
 import com.example.blogserver.services.ICommentService;
+import com.example.blogserver.utils.Translator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.example.blogserver.utils.Translator.translate;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
@@ -28,7 +30,7 @@ public class CommentController {
     public ResponseEntity<String> addComment(@RequestBody SubmitCommentDto submitCommentDto, @PathVariable int postId) {
         commentService.insertComment(submitCommentDto, postId);
 
-        return ResponseEntity.ok("Comment added successfully");
+        return ResponseEntity.ok(translate("Comment added successfully"));
 
     }
 
@@ -36,14 +38,14 @@ public class CommentController {
     public ResponseEntity<String> deleteComment(@PathVariable int id) {
         commentService.deleteComment(id);
 
-        return ResponseEntity.ok("Comment deleted successfully");
+        return ResponseEntity.ok(translate("Comment deleted successfully"));
     }
 
     @PostMapping("/comments/{id}")
     public ResponseEntity<String> updateComment(@RequestBody SubmitCommentDto submitCommentDto, @PathVariable int id) {
         commentService.updateComment(submitCommentDto, id);
 
-        return ResponseEntity.ok("Comment updated successfully");
+        return ResponseEntity.ok(translate("Comment updated successfully"));
 
     }
 
